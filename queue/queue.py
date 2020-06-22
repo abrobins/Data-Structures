@@ -86,6 +86,7 @@ class LinkedList:
 
         value = self.tail.value
         self.tail = current
+        self.tail.next_node = None
         return value
 
     def contains(self, value):
@@ -119,16 +120,26 @@ class LinkedList:
 class Queue:
     def __init__(self):
         self.size = 0
+        # self.storage = []
         self.storage = LinkedList()
 
     def __len__(self):
         return self.size
 
     def enqueue(self, value):
+        # self.storage.append(value)
+        # self.size += 1
         self.size += 1
         return self.storage.add_to_tail(value)
 
     def dequeue(self):
+        # if self.size == 0:
+        #     return None
+        # else:
+        #     value = self.storage[0]
+        #     self.storage.remove(value)
+        #     self.size -= 1
+        #     return value
         if self.size == 0:
             return None
         else:

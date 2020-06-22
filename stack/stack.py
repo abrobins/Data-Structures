@@ -83,6 +83,7 @@ class LinkedList:
 
         value = self.tail.value
         self.tail = current
+        self.tail.next_node = None
         return value
 
     def contains(self, value):
@@ -121,15 +122,17 @@ class Stack:
         self.storage = LinkedList()
 
     def __len__(self):
+        # return len(self.storage)
         return self.size
 
     def push(self, value):
         # for array:
         # self.size += 1
-        # self.storage.append(value)
+        # self.storage.insert(0, value)
         # for linked list:
         self.size += 1
-        self.storage.add_to_tail(value)
+        self.storage.add_to_head(value)
+        # self.storage.add_to_tail(value) also works
 
     def pop(self):
 
@@ -138,9 +141,11 @@ class Stack:
         #     return None
         # else:
         #     self.size -= 1
-        #     return self.storage.pop()
+        # node = self.storage.pop(0)
+        # return node
         if self.size == 0:
             return None
         else:
             self.size -= 1
-            return self.storage.remove_tail()
+            return self.storage.remove_head()
+            # return self.storage.remove_tail() also works
