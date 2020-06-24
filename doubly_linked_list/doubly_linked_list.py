@@ -35,7 +35,11 @@ class ListNode:
         if self.prev:
             self.prev.next = self.next
         if self.next:
-            self.next.prev = self.prev
+           # self.next.prev = self.prev
+
+            # could also do this here instead of line above
+            next_node = self.next
+            next_node.prev = self.prev
 
 
 """Our doubly-linked list class. It holds references to
@@ -57,6 +61,7 @@ class DoublyLinkedList:
 
     def add_to_head(self, value):
         # create a new node
+        # don't have to include None, None
         new_node = ListNode(value, None, None)
         # first check if the DLL is empty
         # if empty
@@ -65,6 +70,8 @@ class DoublyLinkedList:
             self.tail = new_node
             self.length += 1
         else:
+            # the list already has elements
+            # make new node's next value point to current head
             new_node.next = self.head
             self.head.prev = new_node
             self.head = new_node
@@ -75,6 +82,14 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_head(self):
+
+        # artem's code
+        # if self.head is None:
+        #   return None
+        # head_value = self.head.value
+        # self.delete(self.head)
+        # return head_value
+
         # we have a situation where head has a previous value so make sure to remove head same with remove_from_tail
         # check if dll is empty
         if not self.head and not self.tail:
@@ -118,7 +133,10 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_tail(self):
+        if self.tail is None:
+            return None
         tail_value = self.tail.value
+        # delete tail from dll
         self.delete(self.tail)
         return tail_value
 
@@ -127,8 +145,6 @@ class DoublyLinkedList:
 
     def move_to_front(self, node):
         if node is self.head:
-            return None
-        if not self.head.next:
             return None
         head_value = node.value
         self.delete(node)
@@ -148,6 +164,8 @@ class DoublyLinkedList:
     the node was the head or the tail"""
 
     def delete(self, node):
+        # look at Artem's code on this one
+        # check if self.head is self.tail possibly
         self.length -= 1
         if node is self.head:
             self.head = node.next
