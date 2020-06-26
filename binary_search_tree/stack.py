@@ -121,7 +121,7 @@ class Stack:
         # self.storage = []
         self.storage = LinkedList()
 
-    def __len__(self):
+    def len(self):
         # return len(self.storage)
         return self.size
 
